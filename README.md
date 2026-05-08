@@ -30,15 +30,6 @@ This project simulates a real-world business analytics workflow — starting fro
 
 ---
 
-## Structure
-
-```
-sales_pipeline_analysis.sql   — All 16 queries across 6 sections
-README.md                     — This file
-```
-
----
-
 ## Section 1 — Pipeline Health Check
 
 **Business Question:** Before any deep analysis, what is the overall state of the sales pipeline?
@@ -153,15 +144,6 @@ README.md                     — This file
 - Average deal value increases modestly from Small to Enterprise — range of approximately $200 to $2,500
 - Total revenue and account count both increase with company size
 - Gap between small and enterprise deal values is narrower than expected given budget differences — suggests pricing strategy is not fully capitalising on enterprise account capacity
-
----
-
-## How to Run
-
-1. Load all four CSV files into PostgreSQL
-2. Open `sales_pipeline_analysis.sql` in pgAdmin or any PostgreSQL client
-3. Run sections independently — each section is self-contained with its own CTEs
-4. Note: GTXPro normalisation is handled within each product query — no schema changes required
 
 ---
 
