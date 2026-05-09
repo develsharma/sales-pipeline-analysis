@@ -6,9 +6,9 @@ A end-to-end SQL analytics project analysing sales performance across agents, te
 
 ## Project Overview
 
-This project simulates a real-world business analytics workflow starting from raw data exploration, progressing through multi-table joins, and delivering actionable insights across five analytical dimensions. Every query was written to answer a specific business question, not just to demonstrate SQL syntax.
+This project simulates a real-world business analytics workflow starting from raw data exploration, progressing through multi-table joins, and delivering actionable insights across five analytical dimensions. Every query was written to answer a specific business question.
 
-**Tools Used:** PostgreSQL, pgAdmin 4, Power BI  
+**Tools Used:** PostgreSQL, pgAdmin 4  
 **Dataset Period:** October 2016 – December 2017  
 **Total Records:** 8,800 sales opportunities across 4 related tables
 
@@ -20,7 +20,7 @@ This project simulates a real-world business analytics workflow starting from ra
 |---|---|---|
 | sales_pipeline | 8,800 | Core deals table opportunities, stages, close values |
 | sales_teams | 35 | Agent to manager to region mapping |
-| accounts | 85 | Company details — sector, size, location |
+| accounts | 85 | Company details: sector, size, location |
 | products | 7 | Product catalogue with series and list prices |
 
 **Data Quality Issues Identified and Handled:**
@@ -32,7 +32,7 @@ This project simulates a real-world business analytics workflow starting from ra
 
 ## Section 1 — Pipeline Health Check
 
-**Business Question:** Before any deep analysis, what is the overall state of the sales pipeline?
+**Business Question:** What is the overall state of the sales pipeline?
 
 **Approach:** Explored deal distribution across stages, calculated overall win rate against completed deals only (Won + Lost), summarised revenue metrics, and measured average deal cycle time.
 
@@ -63,7 +63,7 @@ This project simulates a real-world business analytics workflow starting from ra
 
 **Business Question:** Which regions and managers are performing best, and who are the standout agents within each region?
 
-**Join:** sales_pipeline: sales_teams on sales_agent
+**Join:** sales_pipeline - sales_teams on sales_agent
 
 **Approach:** Three separate queries at three different grains regional summary, manager summary, and agent-within-region ranking. Grain separation was required because each region has two managers, making a single query impossible without corrupting aggregations.
 
@@ -92,7 +92,7 @@ This project simulates a real-world business analytics workflow starting from ra
 
 **Business Question:** Which products and series generate the most revenue? Which have the best win rates? Are agents specialising in certain products?
 
-**Join:** sales_pipeline → products on product name  
+**Join:** sales_pipeline - products on product name  
 **Data Quality Fix:** GTXPro normalised to GTX Pro via CASE in join condition before aggregation
 
 **Approach:** Three queries at three grains product level, series level, and agent-product matrix. Anti-join verification run before analysis to confirm join integrity.
@@ -121,7 +121,7 @@ This project simulates a real-world business analytics workflow starting from ra
 
 **Business Question:** Which sectors generate the most revenue? Who are the top accounts? Do larger companies buy bigger deals?
 
-**Join:** sales_pipeline: accounts on account name  
+**Join:** sales_pipeline - accounts on account name  
 **Data Quality Note:** 1,425 deals excluded due to NULL account values. All 85 named accounts in sales_pipeline matched successfully to the accounts reference table — no genuine mismatches found.
 
 **Approach:** Three queries at three grains sector summary, top account ranking, and company size bucket analysis using employee count as size proxy.
